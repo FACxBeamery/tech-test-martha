@@ -3,6 +3,7 @@ import findMatchingLocations from "../../../utils/findMatchingLocations";
 import styles from "./LocationForm.module.css";
 const SearchbarContext = createContext();
 
+//TODO detect click outside suggestions
 const LocationFormTitle = () => {
     return (
         <h2 className={styles["form-title"]}>Enter a city to search jobs:</h2>
@@ -124,7 +125,6 @@ const SuggestionsList = () => {
         setDisplaySuggestions
     } = useContext(SearchbarContext);
 
-    console.log(typeof setSearchbarText, "TYPEOF");
     const handleSuggestionClick = event => {
         setSearchbarText(event.target.innerText);
         setActiveSuggestion(0);
@@ -133,9 +133,9 @@ const SuggestionsList = () => {
     };
 
     return filteredSuggestions.length ? (
-        <ul className={styles["suggestions"]}>
+        <ul className={styles["form-suggestions"]}>
             {filteredSuggestions.map((suggestion, index) => {
-                let className;
+                let className = "suggestions-li";
                 if (index === activeSuggestion) {
                     className = "active-suggestion";
                 }
@@ -156,7 +156,7 @@ const SuggestionsList = () => {
     );
 };
 
-const LocationForm = ({ location, setLocation }) => {
+const LocationForm = ({ setLocation }) => {
     const [searchbarText, setSearchbarText] = useState("");
     const [displaySuggestions, setDisplaySuggestions] = useState(false);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
@@ -165,6 +165,7 @@ const LocationForm = ({ location, setLocation }) => {
 
     const handleLocationSubmit = event => {
         event.preventDefault();
+        console.log("SETTING LOCATION", searchbarText);
         setLocation(searchbarText);
     };
 
@@ -181,11 +182,10 @@ const LocationForm = ({ location, setLocation }) => {
                 setActiveSuggestion
             }}
         >
-            <LocationFormTitle />
-            <form onSubmit={handleLocationSubmit}>
+            <form onSubmit={handleLocationSubmit} className={styles["form"]}>
+                <LocationFormTitle />
                 <LocationSearchbar />
-                {displaySuggestions ? <SuggestionsList /> : null}
-                <SubmitButton />
+                {displaySuggestions ? <SuggestionsList /> : <SubmitButton />}
             </form>
         </SearchbarContext.Provider>
     );

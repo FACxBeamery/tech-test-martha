@@ -1,0 +1,41 @@
+.form {
+    /* TODO make header and main equal 100 vh */
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    justify-content: center;
+    align-items: center;
+}
+.form-title {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.form-text-input {
+    width: 15rem;
+}
+
+.form-submit {
+    margin-top: 0.5rem;
+}
+
+.form-suggestions {
+    width: 15rem;
+    border: 1px solid #999;
+    list-style: none;
+    margin-top: 0;
+    overflow-y: auto;
+    padding-left: 0;
+}
+
+.suggestions-li {
+    padding: 0.125rem;
+    background: white;
+}
+
+.active-suggestion,
+.suggestions-li:hover {
+    background: pink !important;
+    color: white;
+    cursor: pointer;
+}
