@@ -1,0 +1,46 @@
+.jobs-list {
+    width: 80vw;
+}
+
+.job-container {
+    display: flex;
+    border: #e8e8e8 solid 0.125rem;
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+}
+
+.job-info-container {
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.company-info-container {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    width: 8rem;
+}
+
+.company-logo {
+    width: 7.5rem;
+    height: 7.5rem;
+}
+
+.company-name {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-style: italic;
+}
+
+.job-title {
+    font-size: 1.5rem;
+    margin: 0;
+    padding-bottom: 0.5rem;
+}
+
+.job-location {
+    font-style: italic;
+    margin: 0;
+}
