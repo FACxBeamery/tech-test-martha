@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 import LocationForm from "./LocationForm/LocationForm";
 import JobsList from "./JobsList/JobsList";
 import getJobs from "../../utils/getJobs";
-//ToDO is it bad to use context sometimes and other times not
-
-//TODO add back button to main page
 
 const Main = () => {
     const [location, setLocation] = useState(null);

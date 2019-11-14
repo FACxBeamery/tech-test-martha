@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import styles from "./JobsList.module.css";
+import capitalizeFirstLetter from "../../../utils/capitalizeFirstLetter";
 
-// TODO add capitaliez first letter
 const JobsListHeader = ({ location }) => {
-    return <h2 className="jobs-list-header">{`Jobs in ${location}`}</h2>;
+    return (
+        <h2 className="jobs-list-header">{`Jobs in ${capitalizeFirstLetter(
+            location
+        )}`}</h2>
+    );
 };
 const BackButton = ({ setJobsData }) => {
     return (
@@ -68,14 +72,12 @@ const ExpandButton = ({ setExpandView }) => {
     );
 };
 
-//TODO make link owrk!!!
 const JobLink = ({ jobInfo }) => {
     return <a href={jobInfo.url}>take me to website</a>;
 };
 const JobsListItem = ({ jobInfo }) => {
     const [expandView, setExpandView] = useState(false);
     return (
-        //TODO use markdownifier for description
         <div className={styles["job-container"]} key={jobInfo.id}>
             <div className={"company-info-container"}>
                 <CompanyLogo jobInfo={jobInfo} />
