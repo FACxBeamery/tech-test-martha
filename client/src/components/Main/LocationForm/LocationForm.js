@@ -5,9 +5,7 @@ const SearchbarContext = createContext();
 
 //TODO detect click outside suggestions
 const LocationFormTitle = () => {
-    return (
-        <h2 className={styles["form-title"]}>Enter a city to search jobs:</h2>
-    );
+    return <h2 className={styles["form-title"]}>Find jobs in your area</h2>;
 };
 const SubmitButton = () => {
     return (
@@ -86,32 +84,35 @@ const LocationSearchbar = () => {
     };
 
     return (
-        <input
-            type="text"
-            name="searchbarText"
-            id="searchbarText"
-            value={searchbarText}
-            autoComplete="off"
-            onChange={event =>
-                handleSearchbarChange(
-                    event,
-                    setSearchbarText,
-                    setDisplaySuggestions,
-                    setFilteredSuggestions
-                )
-            }
-            onKeyDown={event =>
-                handleSearchbarKeyDown(
-                    event,
-                    displaySuggestions,
-                    setDisplaySuggestions,
-                    activeSuggestion,
-                    setActiveSuggestion,
-                    setSearchbarText
-                )
-            }
-            className={styles["form-text-input"]}
-        />
+        <>
+            <label htmlFor="searchbar">Enter a city:</label>
+            <input
+                type="text"
+                name="searchbar"
+                id="searchbar"
+                value={searchbarText}
+                autoComplete="off"
+                onChange={event =>
+                    handleSearchbarChange(
+                        event,
+                        setSearchbarText,
+                        setDisplaySuggestions,
+                        setFilteredSuggestions
+                    )
+                }
+                onKeyDown={event =>
+                    handleSearchbarKeyDown(
+                        event,
+                        displaySuggestions,
+                        setDisplaySuggestions,
+                        activeSuggestion,
+                        setActiveSuggestion,
+                        setSearchbarText
+                    )
+                }
+                className={styles["form-text-input"]}
+            />
+        </>
     );
 };
 
@@ -133,7 +134,10 @@ const SuggestionsList = () => {
     };
 
     return filteredSuggestions.length ? (
-        <ul className={styles["form-suggestions"]}>
+        <ul
+            className={styles["form-suggestions"]}
+            data-testid="suggestions-list"
+        >
             {filteredSuggestions.map((suggestion, index) => {
                 let className = "suggestions-li";
                 if (index === activeSuggestion) {
@@ -185,7 +189,8 @@ const LocationForm = ({ setLocation }) => {
             <form onSubmit={handleLocationSubmit} className={styles["form"]}>
                 <LocationFormTitle />
                 <LocationSearchbar />
-                {displaySuggestions ? <SuggestionsList /> : <SubmitButton />}
+                {displaySuggestions ? <SuggestionsList /> : null}
+                <SubmitButton />
             </form>
         </SearchbarContext.Provider>
     );
