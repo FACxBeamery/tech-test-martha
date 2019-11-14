@@ -40,6 +40,7 @@ const JobDescription = ({ jobInfo }) => {
     return (
         <p
             className={styles["job-description"]}
+            data-testid="job-description"
             dangerouslySetInnerHTML={{ __html: jobInfo.description }}
         ></p>
     );
@@ -103,7 +104,7 @@ const JobsList = ({ location, jobsData, setJobsData }) => {
         <>
             <JobsListHeader location={location} />
             <BackButton setJobsData={setJobsData} />
-            <ul className={styles["jobs-list"]} testId="jobs-list">
+            <ul className={styles["jobs-list"]} data-testid="jobs-list">
                 {jobsData.map(job => {
                     return <JobsListItem jobInfo={job} />;
                 })}
