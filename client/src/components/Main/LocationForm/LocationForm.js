@@ -165,8 +165,8 @@ const SuggestionsList = () => {
         </ul>
     ) : (
         <p className={styles["warning-message"]}>
-            We can't find a matching city!
-            <br /> Check your spelling and try again.
+            We can't find a match!
+            <br /> You're on your own here.
         </p>
     );
 };
