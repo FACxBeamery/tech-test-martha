@@ -19,6 +19,14 @@ const BackButton = ({ setJobsData }) => {
         </button>
     );
 };
+
+const NoJobsMessage = () => {
+    return (
+        <p className={styles["no-jobs-message"]}>
+            We can't find any jobs in this city! Please try another search.
+        </p>
+    );
+};
 const CompanyName = ({ jobInfo }) => {
     return <h4 className={styles["company-name"]}>{jobInfo.company}</h4>;
 };
@@ -28,6 +36,7 @@ const CompanyLogo = ({ jobInfo }) => {
         <img
             className={styles["company-logo"]}
             src={jobInfo.company_logo}
+            alt="company-logo"
         ></img>
     );
 };
@@ -106,11 +115,16 @@ const JobsList = ({ location, jobsData, setJobsData }) => {
         <div className={styles["jobs-container"]}>
             <JobsListHeader location={location} />
             <BackButton setJobsData={setJobsData} />
-            <ul className={styles["jobs-list"]} data-testid="jobs-list">
-                {jobsData.map(job => {
-                    return <JobsListItem jobInfo={job} />;
-                })}
-            </ul>
+
+            {jobsData.length ? (
+                <ul className={styles["jobs-list"]} data-testid="jobs-list">
+                    {jobsData.map(job => {
+                        return <JobsListItem jobInfo={job} />;
+                    })}
+                </ul>
+            ) : (
+                <NoJobsMessage />
+            )}
         </div>
     );
 };
