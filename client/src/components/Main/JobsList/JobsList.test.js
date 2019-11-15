@@ -9,7 +9,7 @@ import { render, fireEvent } from "@testing-library/react";
 describe("Testing the jobs list", () => {
     test("All jobs in data should be rendered", () => {
         const { getByText, getAllByText, getByTestId } = render(
-            <JobsList jobsData={dummyData} />
+            <JobsList location="New York" jobsData={dummyData} />
         );
         const jobsList = getByTestId("jobs-list");
         expect(jobsList.children).toHaveLength(dummyData.length);
@@ -17,9 +17,9 @@ describe("Testing the jobs list", () => {
 
     test("Clicking on expand should show description", () => {
         const { getByText, getAllByText, queryByTestId } = render(
-            <JobsList jobsData={dummyData} />
+            <JobsList location="New York" jobsData={dummyData} />
         );
-        const firstExpandButton = getAllByText("Expand Information")[0];
+        const firstExpandButton = getAllByText("Expand information")[0];
 
         let jobDescription = queryByTestId("job-description");
         expect(jobDescription).toBeNull();
@@ -27,7 +27,7 @@ describe("Testing the jobs list", () => {
         fireEvent.click(firstExpandButton);
         expect(firstExpandButton).not.toBeInTheDocument();
 
-        const collapseButton = getByText("Collapse");
+        const collapseButton = getByText("Collapse information");
         jobDescription = queryByTestId("job-description");
         expect(jobDescription).toBeInTheDocument();
 

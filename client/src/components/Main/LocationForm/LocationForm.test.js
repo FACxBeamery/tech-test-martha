@@ -22,53 +22,53 @@ describe("location form works as expected", () => {
         suggestionsList = queryByTestId("suggestions-list");
         expect(suggestionsList).toBeInTheDocument();
     });
-    test("Going up and down on autocomplete gives class expected", () => {
-        const { getByText, getByLabelText, queryByTestId } = render(
-            <LocationForm />
-        );
-        const searchbar = getByLabelText("Enter a city:");
+    // test("Going up and down on autocomplete gives class expected", () => {
+    //     const { getByText, getByLabelText, queryByTestId } = render(
+    //         <LocationForm />
+    //     );
+    //     const searchbar = getByLabelText("Enter a city:");
 
-        fireEvent.change(searchbar, { target: { value: "lo" } });
+    //     fireEvent.change(searchbar, { target: { value: "lo" } });
 
-        const suggestionsList = queryByTestId("suggestions-list");
+    //     const suggestionsList = queryByTestId("suggestions-list");
 
-        const LongBeachSuggestion = getByText("Long Beach");
-        expect(LongBeachSuggestion).toHaveClass("active-suggestion");
+    //     const LongBeachSuggestion = getByText("Long Beach");
+    //     expect(LongBeachSuggestion).toHaveClass("active-suggestion");
 
-        const LorainSuggestion = getByText("Lorain");
-        expect(LorainSuggestion).toHaveClass("suggestions-li");
-        searchbar.addEventListener("keydown", console.log);
+    //     const LorainSuggestion = getByText("Lorain");
+    //     expect(LorainSuggestion).toHaveClass("suggestions-li");
+    //     searchbar.addEventListener("keydown", console.log);
 
-        // const event = new KeyboardEvent("keydown", { keyCode: 40 });
-        // searchbar.dispatchEvent(event);
-        fireEvent.keyDown(LongBeachSuggestion, {
-            key: "Down",
-            code: 40,
-            charCode: 40
-        });
+    //     // const event = new KeyboardEvent("keydown", { keyCode: 40 });
+    //     // searchbar.dispatchEvent(event);
+    //     fireEvent.keyDown(LongBeachSuggestion, {
+    //         key: "Down",
+    //         code: 40,
+    //         charCode: 40
+    //     });
 
-        expect(LorainSuggestion).toHaveClass("active-suggestion");
-        expect(LongBeachSuggestion).toHaveClass("suggestions-li");
+    //     expect(LorainSuggestion).toHaveClass("active-suggestion");
+    //     expect(LongBeachSuggestion).toHaveClass("suggestions-li");
 
-        // expect(suggestionsList).toHaveClass("active-suggestion");
-    });
-    test("Hover on autocomplete gives class selected", () => {});
-    test("Enter/click on autocomplete item gives class selected", () => {
-        const { getByText, getByLabelText, queryByTestId } = render(
-            <LocationForm />
-        );
-        const searchbar = getByLabelText("Enter a city:");
+    //     expect(suggestionsList).toHaveClass("active-suggestion");
+    // });
+    // test("Hover on autocomplete gives class selected", () => {});
+    // test("Click on autocomplete item gives class selected", () => {
+    //     const { getByText, getByLabelText, queryByTestId } = render(
+    //         <LocationForm />
+    //     );
+    //     const searchbar = getByLabelText("Enter a city:");
 
-        fireEvent.change(searchbar, { target: { value: "lo" } });
+    //     fireEvent.change(searchbar, { target: { value: "lo" } });
 
-        const suggestionsList = queryByTestId("suggestions-list");
+    //     const suggestionsList = queryByTestId("suggestions-list");
 
-        const LongBeachSuggestion = getByText("Long Beach");
+    //     const LongBeachSuggestion = getByText("Long Beach");
 
-        fireEvent.keyDown(searchbar, { key: "Enter", code: 13, charCode: 13 });
+    //     fireEvent.click(LongBeachSuggestion);
 
-        expect(searchbar).toHaveValue("Long Beach");
+    //     expect(searchbar).toHaveValue("Long Beach");
 
-        // expect(suggestionsList).toHaveClass("active-suggestion");
-    });
+    //     expect(suggestionsList).toHaveClass("active-suggestion");
+    // });
 });
