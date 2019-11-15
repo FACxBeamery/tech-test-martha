@@ -8,9 +8,7 @@ import LocationForm from "./LocationForm.js";
 
 describe("location form works as expected", () => {
     test("entering 2 letters brings up autocomplete", () => {
-        const { getByText, getByLabelText, queryByTestId } = render(
-            <LocationForm />
-        );
+        const { getByLabelText, queryByTestId } = render(<LocationForm />);
         const searchbar = getByLabelText("Enter a city:");
 
         let suggestionsList = queryByTestId("suggestions-list");
@@ -20,6 +18,22 @@ describe("location form works as expected", () => {
 
         suggestionsList = queryByTestId("suggestions-list");
         expect(suggestionsList).toBeInTheDocument();
+    });
+
+    test("Clicking on advanced search brings up advanced options", () => {
+        const { getByText, queryByTestId } = render(<LocationForm />);
+
+        const advancedSearchButton = getByText("Advanced Search");
+
+        let advancedSearchForm = queryByTestId("advanced-search-form");
+        expect(advancedSearchForm).not.toBeInTheDocument();
+
+        fireEvent.click(advancedSearchButton);
+
+        expect(advancedSearchButton).not.toBeInTheDocument();
+
+        advancedSearchForm = queryByTestId("advanced-search-form");
+        expect(advancedSearchForm).toBeInTheDocument();
     });
     // test("Going up and down on autocomplete gives class expected", () => {
     //     const { getByText, getByLabelText, queryByTestId } = render(
