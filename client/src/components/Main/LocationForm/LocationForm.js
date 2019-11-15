@@ -174,6 +174,74 @@ const SuggestionsList = () => {
         </p>
     );
 };
+const AdvancedSearchForm = ({ setKeyword, setFullTime }) => {
+    const {
+        keywordText,
+        setKeywordText,
+        fullTimeValue,
+        setFullTimeValue
+    } = useContext(SearchbarContext);
+
+    const handleKeywordChange = event => {
+        setKeywordText(event.target.value);
+    };
+
+    const handleFullTimeChange = event => {
+        setFullTimeValue(event.target.value);
+    };
+    return (
+        <div
+            className={styles["advanced-search-container"]}
+            data-testid="advanced-search-form"
+        >
+            <div className={styles["label-input-container"]}>
+                <label htmlFor="keyword" className={styles["advanced-label"]}>
+                    Enter a keyword:
+                </label>
+                <input
+                    type="text"
+                    id="keyword"
+                    value={keywordText}
+                    onChange={handleKeywordChange}
+                ></input>
+            </div>
+            <div
+                className={`${styles["label-input-container"]} ${styles["right-label"]}`}
+            >
+                <label htmlFor="select" className={styles["advanced-label"]}>
+                    Contract type:
+                </label>
+                <select
+                    value={fullTimeValue}
+                    id="select"
+                    onChange={handleFullTimeChange}
+                >
+                    <option value="Any">Any</option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                </select>
+            </div>
+        </div>
+    );
+};
+
+const AdvancedSearchButton = () => {
+    const { setAdvancedSearch } = useContext(SearchbarContext);
+
+    const handleAdvancedSearchClick = event => {
+        event.preventDefault();
+        setAdvancedSearch(true);
+    };
+    return (
+        <button
+            type="button"
+            className={styles["advanced-search-button"]}
+            onClick={handleAdvancedSearchClick}
+        >
+            Advanced Search
+        </button>
+    );
+};
 
 const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
     const [searchbarText, setSearchbarText] = useState("");
@@ -247,72 +315,6 @@ const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
                 </div>
             </form>
         </SearchbarContext.Provider>
-    );
-};
-
-const AdvancedSearchForm = ({ setKeyword, setFullTime }) => {
-    const {
-        keywordText,
-        setKeywordText,
-        fullTimeValue,
-        setFullTimeValue
-    } = useContext(SearchbarContext);
-
-    const handleKeywordChange = event => {
-        setKeywordText(event.target.value);
-    };
-
-    const handleFullTimeChange = event => {
-        setFullTimeValue(event.target.value);
-    };
-    return (
-        <div className={styles["advanced-search-container"]}>
-            <div className={styles["label-input-container"]}>
-                <label htmlFor="keyword" className={styles["advanced-label"]}>
-                    Enter a keyword:
-                </label>
-                <input
-                    type="text"
-                    id="keyword"
-                    value={keywordText}
-                    onChange={handleKeywordChange}
-                ></input>
-            </div>
-            <div
-                className={`${styles["label-input-container"]} ${styles["right-label"]}`}
-            >
-                <label htmlFor="select" className={styles["advanced-label"]}>
-                    Contract type:
-                </label>
-                <select
-                    value={fullTimeValue}
-                    id="select"
-                    onChange={handleFullTimeChange}
-                >
-                    <option value="Any">Any</option>
-                    <option value="Full Time">Full Time</option>
-                    <option value="Part Time">Part Time</option>
-                </select>
-            </div>
-        </div>
-    );
-};
-
-const AdvancedSearchButton = () => {
-    const { setAdvancedSearch } = useContext(SearchbarContext);
-
-    const handleAdvancedSearchClick = event => {
-        event.preventDefault();
-        setAdvancedSearch(true);
-    };
-    return (
-        <button
-            type="submit"
-            className={styles["advanced-search-button"]}
-            onClick={handleAdvancedSearchClick}
-        >
-            Advanced Search
-        </button>
     );
 };
 
