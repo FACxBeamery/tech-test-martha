@@ -41,7 +41,7 @@
 .active-suggestion,
 .suggestions-li:hover {
     background: pink !important;
-    color: white;
+    color: black;
     cursor: pointer;
 }
 
