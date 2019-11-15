@@ -1,6 +1,7 @@
 import React, { useContext, useState, createContext } from "react";
 import findMatchingLocations from "../../../utils/findMatchingLocations";
 import styles from "./LocationForm.module.css";
+import citiesList from "../../../data/citiesList";
 const SearchbarContext = createContext();
 
 //TODO detect click outside suggestions
@@ -16,6 +17,14 @@ const SubmitButton = () => {
         >
             Search Jobs
         </button>
+    );
+};
+
+const SearchbarLabel = () => {
+    return (
+        <label htmlFor="searchbar" className={styles["searchbar-label"]}>
+            Enter a city:
+        </label>
     );
 };
 const LocationSearchbar = () => {
@@ -42,7 +51,9 @@ const LocationSearchbar = () => {
 
         if (eventText.length > 1) {
             setDisplaySuggestions(true);
-            setFilteredSuggestions(findMatchingLocations(eventText));
+            setFilteredSuggestions(
+                findMatchingLocations(eventText, citiesList)
+            );
         } else {
             setDisplaySuggestions(false);
         }
@@ -84,35 +95,32 @@ const LocationSearchbar = () => {
     };
 
     return (
-        <>
-            <label htmlFor="searchbar">Enter a city:</label>
-            <input
-                type="text"
-                name="searchbar"
-                id="searchbar"
-                value={searchbarText}
-                autoComplete="off"
-                onChange={event =>
-                    handleSearchbarChange(
-                        event,
-                        setSearchbarText,
-                        setDisplaySuggestions,
-                        setFilteredSuggestions
-                    )
-                }
-                onKeyDown={event =>
-                    handleSearchbarKeyDown(
-                        event,
-                        displaySuggestions,
-                        setDisplaySuggestions,
-                        activeSuggestion,
-                        setActiveSuggestion,
-                        setSearchbarText
-                    )
-                }
-                className={styles["form-text-input"]}
-            />
-        </>
+        <input
+            type="text"
+            name="searchbar"
+            id="searchbar"
+            value={searchbarText}
+            autoComplete="off"
+            onChange={event =>
+                handleSearchbarChange(
+                    event,
+                    setSearchbarText,
+                    setDisplaySuggestions,
+                    setFilteredSuggestions
+                )
+            }
+            onKeyDown={event =>
+                handleSearchbarKeyDown(
+                    event,
+                    displaySuggestions,
+                    setDisplaySuggestions,
+                    activeSuggestion,
+                    setActiveSuggestion,
+                    setSearchbarText
+                )
+            }
+            className={styles["form-text-input"]}
+        />
     );
 };
 
@@ -156,7 +164,10 @@ const SuggestionsList = () => {
             })}
         </ul>
     ) : (
-        <p>"NO suggestions sorry!"</p>
+        <p className={styles["warning-message"]}>
+            We can't find a matching city!
+            <br /> Check your spelling and try again.
+        </p>
     );
 };
 
@@ -188,9 +199,14 @@ const LocationForm = ({ setLocation }) => {
         >
             <form onSubmit={handleLocationSubmit} className={styles["form"]}>
                 <LocationFormTitle />
-                <LocationSearchbar />
-                {displaySuggestions ? <SuggestionsList /> : null}
-                <SubmitButton />
+                <div className={styles["searchbar-container"]}>
+                    <SearchbarLabel />
+                    <div className={styles["input-suggestions-container"]}>
+                        <LocationSearchbar />
+                        {displaySuggestions ? <SuggestionsList /> : null}
+                    </div>
+                    <SubmitButton />
+                </div>
             </form>
         </SearchbarContext.Provider>
     );

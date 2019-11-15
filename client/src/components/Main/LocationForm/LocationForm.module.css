@@ -13,10 +13,14 @@
 
 .form-text-input {
     width: 15rem;
+    margin-right: 1rem;
 }
 
 .form-submit {
-    margin-top: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    background-color: lightgreen;
+    border-radius: 0.25rem;
 }
 
 .form-suggestions {
@@ -38,4 +42,26 @@
     background: pink !important;
     color: white;
     cursor: pointer;
+}
+
+.searchbar-container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.searchbar {
+    margin-right: 1rem;
+}
+
+.searchbar-label {
+    margin-right: 1rem;
+}
+
+.input-suggestions-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.warning-message {
+    width: 15rem;
 }
