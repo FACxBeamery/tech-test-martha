@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styles from "./JobsList.module.css";
 import capitalizeFirstLetter from "../../../utils/capitalizeFirstLetter";
 
@@ -83,7 +83,11 @@ const ExpandButton = ({ setExpandView }) => {
 };
 
 const JobLink = ({ jobInfo }) => {
-    return <a href={jobInfo.url}>Apply</a>;
+    return (
+        <a href={jobInfo.url} target="__blank">
+            Apply
+        </a>
+    );
 };
 const JobsListItem = ({ jobInfo }) => {
     const [expandView, setExpandView] = useState(false);
