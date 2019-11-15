@@ -33,3 +33,4 @@ Run ```npm test``` in ```/client``` and ```/server``` to run tests
 ## Known bugs:
 * Dropdown doesn't close on click outside
 * Api part time option doesnt function properly
+* Form error handling needs to be added
