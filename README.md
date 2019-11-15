@@ -32,7 +32,7 @@ The frontend is written in React, and the backend uses Express.
 ## To test:
 Run ```npm test``` in ```/client``` and ```/server``` to run tests
 
-## Known bugs:
+## Known bugs/improvements:
 * Dropdown doesn't close on click outside
 * No tests for key down on suggestions list, can't get it working
 * Test warning on client- unique key bug isn't fixed
