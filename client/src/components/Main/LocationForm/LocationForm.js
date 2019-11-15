@@ -45,7 +45,6 @@ const LocationSearchbar = () => {
         setDisplaySuggestions,
         setFilteredSuggestions
     ) => {
-        //TODO rename event Text
         const eventText = event.target.value;
         setSearchbarText(eventText);
 
@@ -70,10 +69,15 @@ const LocationSearchbar = () => {
         if (displaySuggestions) {
             // Enter key
             if (event.keyCode === 13) {
-                event.preventDefault();
+                const currentSuggestion = filteredSuggestions[activeSuggestion];
                 setActiveSuggestion(0);
                 setDisplaySuggestions(false);
-                setSearchbarText(filteredSuggestions[activeSuggestion]);
+                // If suggestions, enter should change searchbar text
+                // If no suggestions, enter should submit form
+                if (currentSuggestion) {
+                    event.preventDefault();
+                    setSearchbarText(currentSuggestion);
+                }
             }
             // Up key
             else if (event.keyCode === 38) {
@@ -178,7 +182,7 @@ const LocationForm = ({ setLocation }) => {
     const [activeSuggestion, setActiveSuggestion] = useState(0);
     //TODO think about errors
 
-    const handleLocationSubmit = event => {
+    const handleLocationSubmit = (event, searchbarText, setLocation) => {
         event.preventDefault();
         console.log("SETTING LOCATION", searchbarText);
         setLocation(searchbarText);
@@ -197,7 +201,12 @@ const LocationForm = ({ setLocation }) => {
                 setActiveSuggestion
             }}
         >
-            <form onSubmit={handleLocationSubmit} className={styles["form"]}>
+            <form
+                onSubmit={event =>
+                    handleLocationSubmit(event, searchbarText, setLocation)
+                }
+                className={styles["form"]}
+            >
                 <LocationFormTitle />
                 <div className={styles["searchbar-container"]}>
                     <SearchbarLabel />
