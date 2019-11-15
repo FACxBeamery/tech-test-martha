@@ -22,7 +22,8 @@ const paramsString = (location, description, full_time) => {
 };
 
 const replaceSpacesLowercase = str => {
-    const newString = str.replace(/ /g, "+").toLowerCase();
+    let newString = str.trim();
+    newString = str.replace(/ /g, "+").toLowerCase();
     return newString;
 };
 const jobAPICall = async ({ location, description, full_time }) => {
