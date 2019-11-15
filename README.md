@@ -2,6 +2,7 @@
 This project was created to access my progress on the FACxBeamery training scheme thus far. 
 
 A user can search jobs listed on github in their area, and also use advanced search parameters, keywords and contract type. 
+An autocomplete provides suggestions of large US Cities
 
 ![landing page](https://i.imgur.com/eVRmtkv.png)
 
@@ -32,6 +33,5 @@ Run ```npm test``` in ```/client``` and ```/server``` to run tests
 
 ## Known bugs:
 * Dropdown doesn't close on click outside
-* Api part time option doesnt function properly
 * Form error handling needs to be added
 * No tests for key down on suggestions list, can't get it working
