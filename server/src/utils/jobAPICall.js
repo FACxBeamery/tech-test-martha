@@ -8,15 +8,15 @@ const paramsString = (location, description, full_time) => {
             queryString += `&description=${description}`;
         }
         if (full_time) {
-            queryString += `&full_time=${full_time}`;
+            queryString += `&full_time=true`;
         }
     } else if (description) {
         queryString += `?description=${description}`;
         if (full_time) {
-            queryString += `&full_time=${full_time}`;
+            queryString += `&full_time=true`;
         }
     } else if (full_time) {
-        queryString += `?full_time=${full_time}`;
+        queryString += `?full_time=true`;
     }
     return queryString;
 };
