@@ -175,17 +175,27 @@ const SuggestionsList = () => {
     );
 };
 
-const LocationForm = ({ setLocation }) => {
+const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
     const [searchbarText, setSearchbarText] = useState("");
     const [displaySuggestions, setDisplaySuggestions] = useState(false);
     const [filteredSuggestions, setFilteredSuggestions] = useState([]);
     const [activeSuggestion, setActiveSuggestion] = useState(0);
+    const [advancedSearch, setAdvancedSearch] = useState(false);
+    const [keywordText, setKeywordText] = useState("");
+    const [fullTimeValue, setFullTimeValue] = useState("");
     //TODO think about errors
 
-    const handleLocationSubmit = (event, searchbarText, setLocation) => {
+    const handleSubmit = (
+        event,
+        searchbarText,
+        setLocation,
+        setKeyword,
+        setFullTime
+    ) => {
         event.preventDefault();
-        console.log("SETTING LOCATION", searchbarText);
         setLocation(searchbarText);
+        setKeyword(keywordText);
+        setFullTime(fullTimeValue);
     };
 
     return (
@@ -198,16 +208,36 @@ const LocationForm = ({ setLocation }) => {
                 filteredSuggestions,
                 setFilteredSuggestions,
                 activeSuggestion,
-                setActiveSuggestion
+                setActiveSuggestion,
+                advancedSearch,
+                setAdvancedSearch,
+                keywordText,
+                setKeywordText,
+                fullTimeValue,
+                setFullTimeValue
             }}
         >
             <form
                 onSubmit={event =>
-                    handleLocationSubmit(event, searchbarText, setLocation)
+                    handleSubmit(
+                        event,
+                        searchbarText,
+                        setLocation,
+                        setKeyword,
+                        setFullTime
+                    )
                 }
                 className={styles["form"]}
             >
                 <LocationFormTitle />
+                {advancedSearch ? (
+                    <AdvancedSearchForm
+                        setKeyword={setKeyword}
+                        setFullTime={setFullTime}
+                    />
+                ) : (
+                    <AdvancedSearchButton />
+                )}
                 <div className={styles["searchbar-container"]}>
                     <SearchbarLabel />
                     <div className={styles["input-suggestions-container"]}>
@@ -218,6 +248,72 @@ const LocationForm = ({ setLocation }) => {
                 </div>
             </form>
         </SearchbarContext.Provider>
+    );
+};
+
+const AdvancedSearchForm = ({ setKeyword, setFullTime }) => {
+    const {
+        keywordText,
+        setKeywordText,
+        fullTimeValue,
+        setFullTimeValue
+    } = useContext(SearchbarContext);
+
+    const handleKeywordChange = event => {
+        setKeywordText(event.target.value);
+    };
+
+    const handleFullTimeChange = event => {
+        setFullTimeValue(event.target.value);
+    };
+    return (
+        <div className={styles["advanced-search-container"]}>
+            <div className={styles["label-input-container"]}>
+                <label htmlFor="keyword" className={styles["advanced-label"]}>
+                    Enter a keyword:
+                </label>
+                <input
+                    type="text"
+                    id="keyword"
+                    value={keywordText}
+                    onChange={handleKeywordChange}
+                ></input>
+            </div>
+            <div
+                className={`${styles["label-input-container"]} ${styles["right-label"]}`}
+            >
+                <label htmlFor="select" className={styles["advanced-label"]}>
+                    Contract type:
+                </label>
+                <select
+                    value={fullTimeValue}
+                    id="select"
+                    onChange={handleFullTimeChange}
+                >
+                    <option value="Any">Any</option>
+                    <option value="Full Time">Full Time</option>
+                    <option value="Part Time">Part Time</option>
+                </select>
+            </div>
+        </div>
+    );
+};
+
+const AdvancedSearchButton = () => {
+    const { setAdvancedSearch } = useContext(SearchbarContext);
+
+    const handleAdvancedSearchClick = event => {
+        event.preventDefault();
+        setAdvancedSearch(true);
+    };
+    return (
+        <button
+            type="submit"
+            className={styles["advanced-search-button"]}
+            onClick={handleAdvancedSearchClick}
+        >
+            Advanced Search
+        </button>
     );
 };
 

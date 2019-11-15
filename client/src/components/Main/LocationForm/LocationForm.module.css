@@ -69,6 +69,28 @@
     margin: 0;
 }
 
+.advanced-search-container {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.label-input-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.advanced-search-button {
+    margin-bottom: 0.5rem;
+}
+
+.advanced-label {
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+}
+
+.right-label {
+    margin-left: 1rem;
+}
 @media only screen and (max-width: 600px) {
     .form-text-input {
         width: 25vw;
