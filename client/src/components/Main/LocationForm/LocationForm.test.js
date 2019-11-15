@@ -6,6 +6,7 @@ import "@testing-library/jest-dom/extend-expect";
 import { render, fireEvent } from "@testing-library/react";
 import LocationForm from "./LocationForm.js";
 
+//TODO make keydown work
 describe("location form works as expected", () => {
     test("entering 2 letters brings up autocomplete", () => {
         const { getByText, getByLabelText, queryByTestId } = render(

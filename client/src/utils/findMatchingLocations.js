@@ -1,11 +1,8 @@
-import citiesList from "../data/citiesList";
-
 const removeSpacesLowercase = string => {
-    return string.replace(/^\s+|\s+$/g, "").toLowerCase();
+    return string.replace(/\s+/g, "").toLowerCase();
 };
-const findMatchingLocations = inputString => {
+const findMatchingLocations = (inputString, citiesList) => {
     const strippedLowercaseInput = removeSpacesLowercase(inputString);
-
     const matchingCities = citiesList.filter(city =>
         removeSpacesLowercase(city).startsWith(strippedLowercaseInput)
     );
