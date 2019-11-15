@@ -16,17 +16,19 @@ const ErrorMessage = ({ message }) => {
 };
 const Main = () => {
     const [location, setLocation] = useState(null);
+    const [keyword, setKeyword] = useState(null);
+    const [fullTime, setFullTime] = useState(null);
     const [jobsData, setJobsData] = useState(null);
 
     useEffect(() => {
         const getAPIJobs = async (location, setJobsData) => {
             if (location) {
-                const apiData = await getJobs(location);
+                const apiData = await getJobs(location, keyword, fullTime);
                 setJobsData(apiData);
             }
         };
         getAPIJobs(location, setJobsData);
-    }, [location, setJobsData]);
+    }, [location, keyword, fullTime, setJobsData]);
 
     return (
         <>
@@ -34,17 +36,27 @@ const Main = () => {
                 Array.isArray(jobsData) ? (
                     <JobsList
                         location={location}
+                        keyword={keyword}
+                        fullTime={fullTime}
                         jobsData={jobsData}
                         setJobsData={setJobsData}
                     />
                 ) : (
                     <>
                         <ErrorMessage message={jobsData} />
-                        <LocationForm setLocation={setLocation} />
+                        <LocationForm
+                            setLocation={setLocation}
+                            setKeyword={setKeyword}
+                            setFullTime={setFullTime}
+                        />
                     </>
                 )
             ) : (
-                <LocationForm setLocation={setLocation} />
+                <LocationForm
+                    setLocation={setLocation}
+                    setKeyword={setKeyword}
+                    setFullTime={setFullTime}
+                />
             )}
         </>
     );

@@ -1,5 +1,3 @@
-const axios = require("axios");
-
 const paramsString = (location, description, full_time) => {
     let queryString = "";
     if (full_time === "All") {
@@ -29,23 +27,4 @@ const paramsString = (location, description, full_time) => {
     return queryString;
 };
 
-const replaceSpacesLowercase = str => {
-    let newString = str.trim();
-    newString = str.replace(/ /g, "+").toLowerCase();
-    return newString;
-};
-const jobAPICall = async ({ location, description, full_time }) => {
-    const queryString = paramsString(location, description, full_time);
-
-    const urlQueryString = replaceSpacesLowercase(queryString);
-
-    const url = `https://jobs.github.com/positions.json${urlQueryString}`;
-
-    let res = await axios.get(url);
-
-    let jobData = res.data;
-
-    return jobData;
-};
-
-module.exports = jobAPICall;
+export default paramsString;

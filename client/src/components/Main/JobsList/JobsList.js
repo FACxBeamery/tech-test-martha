@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styles from "./JobsList.module.css";
 import capitalizeFirstLetter from "../../../utils/capitalizeFirstLetter";
 
-const JobsListHeader = ({ location }) => {
+const JobsListHeader = ({ location, keyword, fullTime }) => {
     return (
-        <h2 className="jobs-list-header">{`Jobs in ${capitalizeFirstLetter(
-            location
-        )}`}</h2>
+        <h2 className="jobs-list-header">{`${fullTime +
+            " "}Jobs in ${capitalizeFirstLetter(location)}${
+            keyword ? ' matching keyword "' + keyword + '"' : ""
+        }`}</h2>
     );
 };
 const BackButton = ({ setJobsData }) => {
@@ -82,7 +83,11 @@ const ExpandButton = ({ setExpandView }) => {
 };
 
 const JobLink = ({ jobInfo }) => {
-    return <a href={jobInfo.url}>Apply</a>;
+    return (
+        <a href={jobInfo.url} target="__blank">
+            Apply
+        </a>
+    );
 };
 const JobsListItem = ({ jobInfo }) => {
     const [expandView, setExpandView] = useState(false);
@@ -110,10 +115,14 @@ const JobsListItem = ({ jobInfo }) => {
         </div>
     );
 };
-const JobsList = ({ location, jobsData, setJobsData }) => {
+const JobsList = ({ location, keyword, fullTime, jobsData, setJobsData }) => {
     return (
         <div className={styles["jobs-container"]}>
-            <JobsListHeader location={location} />
+            <JobsListHeader
+                location={location}
+                keyword={keyword}
+                fullTime={fullTime}
+            />
             <BackButton setJobsData={setJobsData} />
 
             {jobsData.length ? (

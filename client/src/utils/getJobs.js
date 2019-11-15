@@ -1,10 +1,10 @@
 import axios from "axios";
+import paramString from "../utils/paramsString";
 
-const getJobs = async location => {
+const getJobs = async (location, keyword, fullTime) => {
     try {
-        const res = await axios.get(
-            `http://localhost:4000/jobs?location=${location}`
-        );
+        const queryString = paramString(location, keyword, fullTime);
+        const res = await axios.get(`http://localhost:4000/jobs${queryString}`);
         const jobsData = res.data;
         return jobsData;
     } catch (err) {
