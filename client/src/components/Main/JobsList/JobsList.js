@@ -53,10 +53,10 @@ const JobDescription = ({ jobInfo }) => {
 const CollapseButton = ({ setExpandView }) => {
     return (
         <button
-            className={styles["collapse-button"]}
+            className={styles["expand-collapse-button"]}
             onClick={e => setExpandView(false)}
         >
-            Collapse
+            Collapse information
         </button>
     );
 };
@@ -64,16 +64,16 @@ const CollapseButton = ({ setExpandView }) => {
 const ExpandButton = ({ setExpandView }) => {
     return (
         <button
-            className={styles["expand-button"]}
+            className={styles["expand-collapse-button"]}
             onClick={e => setExpandView(true)}
         >
-            Expand Information
+            Expand information
         </button>
     );
 };
 
 const JobLink = ({ jobInfo }) => {
-    return <a href={jobInfo.url}>take me to website</a>;
+    return <a href={jobInfo.url}>Apply</a>;
 };
 const JobsListItem = ({ jobInfo }) => {
     const [expandView, setExpandView] = useState(false);
@@ -81,10 +81,10 @@ const JobsListItem = ({ jobInfo }) => {
         <div className={styles["job-container"]} key={jobInfo.id}>
             <div className={"company-info-container"}>
                 <CompanyLogo jobInfo={jobInfo} />
-                <CompanyName jobInfo={jobInfo} />
             </div>
             <div className={styles["job-info-container"]}>
                 <JobTitle jobInfo={jobInfo} />
+                <CompanyName jobInfo={jobInfo} />
                 <JobLocation jobInfo={jobInfo} />
 
                 {expandView ? (
@@ -103,7 +103,7 @@ const JobsListItem = ({ jobInfo }) => {
 };
 const JobsList = ({ location, jobsData, setJobsData }) => {
     return (
-        <>
+        <div className={styles["jobs-container"]}>
             <JobsListHeader location={location} />
             <BackButton setJobsData={setJobsData} />
             <ul className={styles["jobs-list"]} data-testid="jobs-list">
@@ -111,7 +111,7 @@ const JobsList = ({ location, jobsData, setJobsData }) => {
                     return <JobsListItem jobInfo={job} />;
                 })}
             </ul>
-        </>
+        </div>
     );
 };
 

@@ -14,6 +14,7 @@
     padding-left: 1.5rem;
     display: flex;
     flex-direction: column;
+    width: 60vw;
 }
 
 .company-info-container {
@@ -30,7 +31,9 @@
 
 .company-name {
     margin: 0;
-    font-size: 0.8125rem;
+    font-size: 1.25rem;
+    background-color: #e4e4e4;
+    padding-left: 0.25rem;
     font-style: italic;
 }
 
@@ -41,6 +44,24 @@
 }
 
 .job-location {
-    font-style: italic;
-    margin: 0;
+    margin: 0.25rem;
+}
+
+.jobs-container {
+    padding-left: 2rem;
+}
+
+.back-button {
+    font-size: 1rem;
+    border: none;
+    background-color: lightgreen;
+    border-radius: 0.25rem;
+}
+
+.expand-collapse-button {
+    border: none;
+    align-self: flex-end;
+    font-size: 1rem;
+    background-color: lightgreen;
+    border-radius: 0.25rem;
 }
