@@ -1,11 +1,35 @@
 # Job Search Genie
+This project was created to access my progress on the FACxBeamery training scheme thus far. 
 
+A user can search jobs listed on github in their area, and also use advanced search parameters, keywords and contract type. 
+
+![landing page](https://i.imgur.com/eVRmtkv.png)
+
+![jobs list](https://i.imgur.com/KGyGyd6.png)
 This app uses the https://jobs.github.com/api API, to locate jobs in an area that a user searches. 
 The frontend is written in React, and the backend uses Express. 
 
-## To run: 
-* run ```npm i ``` in client and server separately 
-* run ```npm start``` in client and server separately 
+
+## Tech Stack:
+### Frontend:
+* React app (create-react-app used)
+* Jest used for testing
+
+### Backend: 
+* Express server
+* Jest, supertest, nock used for testing
+
+## To run locally: 
+1. ```git clone https://github.com/FACxBeamery/tech-test-martha.git```
+
+2. ```cd client``` ```npm i``` ```npm start```
+
+3. ```cd server``` ```npm i``` ```npm start```
+
 
 ## To test:
-* run ```npm test``` in client and server to run tests on each one
+Run ```npm test``` in ```/client``` and ```/server``` to run tests
+
+## Known bugs:
+* Dropdown doesn't close on click outside
+* Api part time option doesnt function properly
