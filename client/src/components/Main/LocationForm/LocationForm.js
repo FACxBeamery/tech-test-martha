@@ -218,7 +218,6 @@ const AdvancedSearchForm = ({ setKeyword, setFullTime }) => {
                 >
                     <option value="Any">Any</option>
                     <option value="Full Time">Full Time</option>
-                    <option value="Part Time">Part Time</option>
                 </select>
             </div>
         </div>
