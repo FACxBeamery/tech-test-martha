@@ -87,11 +87,20 @@
     font-size: 0.75rem;
 }
 
+.error-input {
+    border: red solid 0.125rem;
+    width: 15rem;
+    margin-right: 1rem;
+}
+
 .right-label {
     margin-left: 1rem;
 }
 @media only screen and (max-width: 600px) {
     .form-text-input {
+        width: 25vw;
+    }
+    .error-input {
         width: 25vw;
     }
     .warning-message {

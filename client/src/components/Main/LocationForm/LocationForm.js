@@ -36,7 +36,9 @@ const LocationSearchbar = () => {
         activeSuggestion,
         setActiveSuggestion,
         filteredSuggestions,
-        setFilteredSuggestions
+        setFilteredSuggestions,
+        errors,
+        setErrors
     } = useContext(SearchbarContext);
 
     const handleSearchbarChange = (
@@ -48,6 +50,9 @@ const LocationSearchbar = () => {
         const eventText = event.target.value;
         setSearchbarText(eventText);
 
+        if (eventText.length > 0) {
+            setErrors(false);
+        }
         if (eventText.length > 1) {
             setDisplaySuggestions(true);
             setFilteredSuggestions(
@@ -98,6 +103,7 @@ const LocationSearchbar = () => {
         }
     };
 
+    console.log(errors);
     return (
         <input
             type="text"
@@ -123,7 +129,9 @@ const LocationSearchbar = () => {
                     setSearchbarText
                 )
             }
-            className={styles["form-text-input"]}
+            className={`${
+                errors ? styles[`error-input`] : styles["form-text-input"]
+            }`}
         />
     );
 };
@@ -250,6 +258,7 @@ const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
     const [advancedSearch, setAdvancedSearch] = useState(false);
     const [keywordText, setKeywordText] = useState("");
     const [fullTimeValue, setFullTimeValue] = useState("");
+    const [errors, setErrors] = useState(false);
 
     const handleSubmit = (
         event,
@@ -259,9 +268,13 @@ const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
         setFullTime
     ) => {
         event.preventDefault();
-        setLocation(searchbarText);
-        setKeyword(keywordText);
-        setFullTime(fullTimeValue);
+        if (searchbarText.length > 1) {
+            setLocation(searchbarText);
+            setKeyword(keywordText);
+            setFullTime(fullTimeValue);
+        } else {
+            setErrors(true);
+        }
     };
 
     return (
@@ -280,7 +293,9 @@ const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
                 keywordText,
                 setKeywordText,
                 fullTimeValue,
-                setFullTimeValue
+                setFullTimeValue,
+                errors,
+                setErrors
             }}
         >
             <form
