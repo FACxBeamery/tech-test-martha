@@ -1,5 +1,4 @@
 .form {
-    /* TODO make header and main equal 100 vh */
     display: flex;
     flex-direction: column;
     margin-top: 10rem;

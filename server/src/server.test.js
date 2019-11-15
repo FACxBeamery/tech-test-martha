@@ -30,7 +30,6 @@ describe("test GET request for external API", () => {
             .get("/jobs")
             .expect(200)
             .end(function(err, res) {
-                console.log("RES", res.body);
                 expect(res.body).toEqual(mockJob);
                 if (err) {
                     return done(err);

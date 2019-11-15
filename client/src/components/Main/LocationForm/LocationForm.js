@@ -183,7 +183,6 @@ const LocationForm = ({ setLocation, setKeyword, setFullTime }) => {
     const [advancedSearch, setAdvancedSearch] = useState(false);
     const [keywordText, setKeywordText] = useState("");
     const [fullTimeValue, setFullTimeValue] = useState("");
-    //TODO think about errors
 
     const handleSubmit = (
         event,
